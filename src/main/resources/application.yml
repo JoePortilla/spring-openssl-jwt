@@ -1,0 +1,40 @@
+server:
+  port: 8080
+spring:
+  profiles:
+    active: dev
+jwtKeys:
+  privateKeyPath: jwtKeys/private_key.pem
+  publicKeyPath: jwtKeys/public_key.pem
+---
+spring:
+  application:
+    name: apirest_dev
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: ${POSTGRES_DB_DEV}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASS}
+  jpa:
+    database: postgresql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+---
+spring:
+  application:
+    name: apirest_prod
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${POSTGRES_DB_PROD}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASS}
+  jpa:
+    database: postgresql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
